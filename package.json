@@ -8,10 +8,12 @@
   "scripts": {
     "dev": "vinext dev",
     "build": "vinext build",
+    "build:pages": "next build",
     "start": "vinext start",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next"
   },
   "dependencies": {
+    "geist": "^1.7.2",
     "next": "^16.3.2",
     "react": "19.2.8",
     "react-dom": "19.2.8"

@@ -2,6 +2,8 @@
 
 KDA Wishlist is a community program for turning reproducible kernel definitions into optimized kernel solutions. A kernel is a performance-critical program that runs on accelerated hardware, such as a graphics processing unit (GPU), and implements the core computation of a machine learning operation.
 
+Live site: <https://docs.humanfia.ai/KDA-wishlist/>
+
 KDA stands for Kernel Design Agents: a workflow in which coding agents research, implement, verify, profile, and iterate on performance-sensitive kernel tasks.
 
 This website introduces the program, helps contributors prepare reproducible kernel definitions and workloads, and directs them to GitHub Issues. GitHub Issues is the repository's public request tracker, where contributors submit kernel needs, add useful context, and signal demand with thumbs-up reactions.
@@ -26,6 +28,14 @@ npm run build
 npm run start -- --port 3000
 ```
 
+To create the static export used by GitHub Pages:
+
+```bash
+GITHUB_PAGES=true GITHUB_REPOSITORY=humanfia/KDA-wishlist npm run build:pages
+```
+
+The exported site is written to `out/`.
+
 ## Validate the project
 
 ```bash
@@ -35,6 +45,8 @@ npm audit
 ```
 
 The production build targets Cloudflare Workers, Cloudflare's distributed edge runtime. The logical hosting configuration lives in `.openai/hosting.json`.
+
+Pushes to `main` also run `.github/workflows/deploy-pages.yml`, which builds the static export and deploys it to GitHub Pages.
 
 ## Submission workflow
 
