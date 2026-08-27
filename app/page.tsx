@@ -2,38 +2,200 @@ const NEW_REQUEST_URL =
   'https://github.com/humanfia/KDA-wishlist/issues/new?template=kernel-request.yml';
 const ISSUES_URL = 'https://github.com/humanfia/KDA-wishlist/issues';
 const KDA_URL = 'https://github.com/mit-han-lab/kernel-design-agents';
+const TECH_REPORT_URL =
+  'https://github.com/mit-han-lab/mlsys2026-flashinfer-contest/blob/main/docs/HAN_Lab_Kernel_Mafia_Technical_Report.pdf';
 const CONTEST_URL =
   'https://github.com/mit-han-lab/mlsys2026-flashinfer-contest';
 
-const submissionItems = [
-  ['Reference implementation', 'The known-correct baseline.'],
-  ['Representative workloads', 'Shapes and cases that matter in practice.'],
-  ['Inputs & outputs', 'Data types, layouts, and expected behavior.'],
-  ['Correctness contract', 'Tolerances, edge cases, and validation rules.'],
-  ['Target hardware', 'The graphics processing unit (GPU) to optimize for.'],
-  ['Benchmark setup', 'A reproducible way to measure performance.'],
-  ['Optimization goal', 'Latency, throughput, memory, or another clear target.'],
-  ['Constraints', 'Licensing, dependencies, and integration boundaries.'],
-];
+const achievements = [
+  {
+    metric: '1.39×',
+    metricLabel: 'peak vs. human SOTA',
+    title: 'KDA-0.5 surpassed human SOTA',
+    benchmark: 'MLSys’26 FlashInfer Kernel Contest · B300 · MoE 1.25× · DSA 1.30× · GDN 1.39×',
+    id: 'kda-1.5-flashinfer-contest',
+    project: 'FLASHINFER CONTEST',
+    status: 'SOTA',
+    linkLabel: 'Contest solution repo',
+    href: CONTEST_URL,
+    source: 'Humanize + KDA Achievements[NV Internal].pdf · p. 2',
+  },
+  {
+    metric: '#1',
+    metricLabel: 'SOLExec L1',
+    title: 'KDA boosts Databricks to rank #1 on SOL-Bench',
+    benchmark: 'L1 Single Operation track · score 0.7608 · previous best 0.7584',
+    id: 'solexec-l1',
+    project: 'SOLEXEC',
+    status: '1ST PLACE',
+    linkLabel: 'Announcement on X',
+    href: 'https://x.com/Yuchenj_UW/status/2072496816336290143',
+    source: 'Humanize + KDA Achievements[NV Internal].pdf · p. 12',
+  },
+  {
+    metric: 'TOP3',
+    metricLabel: 'all contest tracks',
+    title: 'KDA-0.1 achieves TOP3 on every track',
+    benchmark: 'MLSys’26 FlashInfer Contest · FP8MoE 1.4× · DSA 33.3× · GDN 17.6×',
+    id: 'kda-0.1-flashinfer-contest',
+    project: 'FLASHINFER CONTEST',
+    status: 'TOP 3',
+    linkLabel: 'MLSys’26 Contest',
+    href: 'https://mlsys26.flashinfer.ai/',
+    source: 'Humanize + KDA Achievements[NV Internal].pdf · p. 14',
+  },
+  {
+    metric: '6.1×',
+    metricLabel: 'balanced k-means',
+    title: 'Flash-KMeans',
+    benchmark: 'KDA speedup for the Wan 2.2 workload on B200',
+    id: 'flash-kmeans',
+    project: 'FLASH-KMEANS',
+    status: 'OPEN SOURCE',
+    linkLabel: 'Flash-KMeans #23',
+    href: 'https://github.com/svg-project/flash-kmeans/pull/23',
+    source: 'Humanize + KDA Achievements[NV Internal].pdf · p. 2',
+  },
+  {
+    metric: '2.32×',
+    metricLabel: 'peak denoising',
+    title: 'Spectral Progressive Diffusion',
+    benchmark: 'FLUX.1 1.63×, FLUX.2 1.77×, Z-Image 2.07×, Wan 2.32×, Qwen-Image 1.60×',
+    id: '27524',
+    project: 'SGLANG',
+    status: 'MERGED',
+    linkLabel: 'SGLang #27524',
+    href: 'https://github.com/sgl-project/sglang/pull/27524',
+    source: 'Humanize + KDA Achievements.pdf · p. 7',
+  },
+  {
+    metric: '1.41×',
+    metricLabel: 'faster decode',
+    title: 'LTX-2 VAE channels-last-3d',
+    benchmark: '5.41 → 3.84 s; latency −29.0%',
+    id: '27431',
+    project: 'SGLANG',
+    status: 'MERGED',
+    linkLabel: 'SGLang #27431',
+    href: 'https://github.com/sgl-project/sglang/pull/27431',
+    source: 'Humanize + KDA Achievements.pdf · p. 7',
+  },
+] as const;
 
 const workflow = [
-  ['01', 'Open a request', 'Share a reproducible FlashInfer Trace definition and explain why the kernel matters.'],
-  ['02', 'Community signals', 'Others add a thumbs-up reaction to the GitHub issue and contribute useful workload context.'],
-  ['03', 'We research & build', 'Accepted tasks enter a measured loop of analysis, generation, correctness checks, and profiling.'],
-  ['04', 'Results return', 'We publish the strongest validated kernel with benchmarks, reproduction steps, and known limits.'],
-];
+  {
+    number: '01',
+    title: 'Open a request',
+    copy: 'Share a reproducible FlashInfer Trace definition and explain why the kernel matters.',
+    teaser: 'request',
+  },
+  {
+    number: '02',
+    title: 'Community votes',
+    copy: 'Others add a thumbs-up reaction to the GitHub issue and contribute useful workload context.',
+    teaser: 'signals',
+  },
+  {
+    number: '03',
+    title: 'KDA thinks and builds',
+    copy: 'Accepted tasks enter a measured loop of analysis, generation, correctness checks, and profiling.',
+    teaser: 'agents',
+  },
+  {
+    number: '04',
+    title: 'Results return',
+    copy: 'We publish the strongest validated kernel with benchmarks, reproduction steps, and known limits.',
+    teaser: 'results',
+  },
+] as const;
+
+type WorkflowTeaserKind = (typeof workflow)[number]['teaser'];
+
+function WorkflowTeaser({ kind }: { kind: WorkflowTeaserKind }) {
+  if (kind === 'request') {
+    return (
+      <div className="workflow-teaser" aria-hidden="true">
+        <svg viewBox="0 0 180 82" focusable="false">
+          <rect className="teaser-frame" x="1" y="1" width="178" height="80" rx="10" />
+          <path className="teaser-stroke" d="M22 24H154M22 41H128M22 58H104" />
+          <path className="teaser-accent-stroke" d="M151 18V30M145 24H157" />
+          <circle className="teaser-packet" r="4">
+            <animateMotion path="M22 24H154" dur="2.8s" repeatCount="indefinite" />
+          </circle>
+        </svg>
+      </div>
+    );
+  }
+
+  if (kind === 'signals') {
+    return (
+      <div className="workflow-teaser" aria-hidden="true">
+        <svg viewBox="0 0 180 82" focusable="false">
+          <rect className="teaser-frame" x="1" y="1" width="178" height="80" rx="10" />
+          <rect className="teaser-node-box" x="18" y="23" width="48" height="36" rx="6" />
+          <path className="teaser-stroke teaser-dash" d="M68 41H157" />
+          <circle className="teaser-signal teaser-signal-one" cx="100" cy="41" r="5" />
+          <circle className="teaser-signal teaser-signal-two" cx="128" cy="41" r="5" />
+          <circle className="teaser-signal teaser-signal-three" cx="156" cy="41" r="5" />
+          <path className="teaser-accent-stroke" d="M35 44L42 37M42 37V49" />
+          <circle className="teaser-packet" r="4">
+            <animateMotion path="M157 41H68" dur="3.1s" repeatCount="indefinite" />
+          </circle>
+        </svg>
+      </div>
+    );
+  }
+
+  if (kind === 'agents') {
+    return (
+      <div className="workflow-teaser" aria-hidden="true">
+        <svg viewBox="0 0 180 82" focusable="false">
+          <rect className="teaser-frame" x="1" y="1" width="178" height="80" rx="10" />
+          <circle className="teaser-orbit teaser-orbit-outer" cx="90" cy="41" r="29" />
+          <circle className="teaser-orbit teaser-orbit-inner" cx="90" cy="41" r="20" />
+          <circle className="teaser-core" cx="90" cy="41" r="12" />
+          <text className="teaser-core-label" x="90" y="43">KDA</text>
+          <g className="teaser-orbiting teaser-orbiting-one">
+            <circle className="teaser-packet" cx="90" cy="12" r="4" />
+          </g>
+          <g className="teaser-orbiting teaser-orbiting-two">
+            <circle className="teaser-packet teaser-packet-muted" cx="90" cy="21" r="3.5" />
+          </g>
+        </svg>
+      </div>
+    );
+  }
+
+  return (
+    <div className="workflow-teaser" aria-hidden="true">
+      <svg viewBox="0 0 180 82" focusable="false">
+        <rect className="teaser-frame" x="1" y="1" width="178" height="80" rx="10" />
+        <path className="teaser-stroke" d="M20 62H157" />
+        <rect className="teaser-bar teaser-bar-one" x="28" y="45" width="18" height="17" rx="2" />
+        <rect className="teaser-bar teaser-bar-two" x="58" y="34" width="18" height="28" rx="2" />
+        <rect className="teaser-bar teaser-bar-three" x="88" y="20" width="18" height="42" rx="2" />
+        <path className="teaser-accent-stroke teaser-result-line" d="M27 42L67 31L97 17L137 25" />
+        <circle className="teaser-packet" r="4">
+          <animateMotion path="M27 42L67 31L97 17L137 25" dur="3.2s" repeatCount="indefinite" />
+        </circle>
+        <circle className="teaser-result-check" cx="148" cy="26" r="13" />
+        <path className="teaser-check-mark" d="M142 26L147 31L155 21" />
+      </svg>
+    </div>
+  );
+}
 
 export default function Home() {
   return (
     <main>
       <nav className="nav shell" aria-label="Primary navigation">
         <a className="brand" href="#top" aria-label="KDA Wishlist home">
-          <span className="brand-mark" aria-hidden="true">K</span>
+          <span className="brand-mark" aria-hidden="true">KDA</span>
           <span>KDA <b>Wishlist</b></span>
         </a>
         <div className="nav-links">
           <a href="#process">How it works</a>
-          <a href="#submit">Submission guide</a>
+          <a href="#achievements">Achievements</a>
           <a href="#faq">FAQ</a>
           <a className="nav-cta" href={ISSUES_URL}>View wishlist <span aria-hidden="true">↗</span></a>
         </div>
@@ -41,17 +203,21 @@ export default function Home() {
 
       <section className="hero shell" id="top">
         <div className="hero-copy">
-          <div className="eyebrow"><span /> Community kernel program</div>
-          <h1>Submit a definition.<br /><em>Get a solution.</em></h1>
-          <p className="hero-lede">
-            Turn a reproducible kernel bottleneck into an optimized, validated implementation—researched and built by Kernel Design Agents.
-          </p>
+          <div className="eyebrow"><span /> Agentic CUDA kernel program</div>
+          <h1>Community wants,<br className="hero-title-break" /> <em>KDA provides!</em></h1>
+          <div className="hero-lede">
+            <p>Need a CUDA kernel for your training/inference but cannot find the experts to implement?</p>
+            <p>Submit your definitions and workloads to KDA-wishlist, and KDA will automatically optimize it w/ agentic workflows!</p>
+          </div>
           <div className="hero-actions">
             <a className="button button-primary" href={NEW_REQUEST_URL}>
-              Submit a kernel <span aria-hidden="true">↗</span>
+              Request a kernel <span aria-hidden="true">↗</span>
             </a>
             <a className="button button-quiet" href={ISSUES_URL}>
               Browse &amp; upvote requests
+            </a>
+            <a className="button button-quiet" href={KDA_URL}>
+              KDA Repo <span aria-hidden="true">↗</span>
             </a>
           </div>
           <p className="hero-note">Open process. Public results. Built for real workloads.</p>
@@ -59,19 +225,19 @@ export default function Home() {
 
         <div className="pipeline" aria-label="Kernel Design Agents workflow">
           <div className="pipeline-topline">
-            <span>REQUEST / 001</span>
+            <span>REQUEST</span>
             <span className="live"><i /> ACCEPTING</span>
           </div>
           <div className="pipeline-stage stage-input">
             <span className="stage-index">01</span>
             <div><small>YOU PROVIDE</small><strong>FlashInfer Trace</strong><p>Definition · Workloads · Target</p></div>
           </div>
-          <div className="connector"><span>↓</span><small>research · generate · verify</small></div>
+          <div className="connector connector-research"><span className="connector-track" aria-hidden="true"><i /></span><small>research · generate · verify</small></div>
           <div className="pipeline-stage stage-process">
             <span className="stage-index">02</span>
             <div><small>WE RUN</small><strong>Kernel Design Agents</strong><p>Explore and benchmark candidates</p></div>
           </div>
-          <div className="connector"><span>↓</span><small>select strongest candidate</small></div>
+          <div className="connector connector-select"><span className="connector-track" aria-hidden="true"><i /></span><small>select strongest candidate</small></div>
           <div className="pipeline-stage stage-output">
             <span className="stage-index">03</span>
             <div><small>YOU GET</small><strong>Validated kernel</strong><p>Code · Benchmarks · Reproduction</p></div>
@@ -82,21 +248,21 @@ export default function Home() {
 
       <section className="definition-strip" aria-label="Program definition">
         <div className="shell definition-grid">
-          <p><strong>A kernel</strong> is the small, performance-critical program at the heart of an accelerated machine learning operation.</p>
-          <p><strong>KDA Wishlist</strong> turns community-submitted kernel needs into public, reproducible optimization projects.</p>
+          <p><strong>CUDA kernels</strong> are foundational to the modern LLM ecosystem, but building high-performance implementations requires deep expertise.</p>
+          <p><strong>KDA Wishlist</strong> is an experimental program where the KDA team uses agentic workflows to build the kernels the community needs.</p>
         </div>
       </section>
 
       <section className="section shell process-section" id="process">
         <div className="section-heading">
           <p className="section-label">HOW IT WORKS</p>
-          <h2>From bottleneck<br />to benchmark.</h2>
+          <h2>From definitions<br />to implementations</h2>
         </div>
         <div className="section-intro">
           <p>
-            Kernel Design Agents (KDA) are coding systems that research, implement, verify, and iterate on performance-sensitive kernel tasks. Each request gives them a measurable contract—not just an idea.
+            Kernel Design Agents (KDA) are agentic CUDA systems that research, implement, verify, and iterate on performance-sensitive kernel tasks. Each request gives them a measurable contract—not just an idea.
           </p>
-          <a className="text-link" href={KDA_URL}>Explore the KDA research workflow <span aria-hidden="true">↗</span></a>
+          <a className="text-link" href={TECH_REPORT_URL}>Explore the KDA tech report <span aria-hidden="true">↗</span></a>
         </div>
       </section>
 
@@ -106,9 +272,10 @@ export default function Home() {
           <span>GITHUB-MANAGED</span>
         </div>
         <div className="workflow-grid">
-          {workflow.map(([number, title, copy]) => (
+          {workflow.map(({ number, title, copy, teaser }) => (
             <article className="workflow-step" key={number}>
               <div className="step-number">{number}</div>
+              <WorkflowTeaser kind={teaser} />
               <h3>{title}</h3>
               <p>{copy}</p>
             </article>
@@ -116,60 +283,50 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section shell submit-section" id="submit">
-        <div className="submission-copy">
-          <p className="section-label">A STRONG SUBMISSION</p>
-          <h2>One issue.<br />Everything we need.</h2>
-          <p className="large-copy">
-            Submit in FlashInfer Trace, a reproducible format that describes what to compute, how to test it, and which workloads matter. Specific requests move faster.
-          </p>
-          <div className="inline-actions">
-            <a className="button button-primary" href={NEW_REQUEST_URL}>Use the request template <span aria-hidden="true">↗</span></a>
-            <a className="text-link" href="https://github.com/flashinfer-ai/flashinfer-bench">About FlashInfer Trace <span aria-hidden="true">↗</span></a>
-          </div>
-        </div>
-
-        <div className="requirements" aria-label="Submission requirements">
-          <div className="requirements-head">
-            <span>REQUEST CHECKLIST</span>
-            <span>8 / 8</span>
-          </div>
-          {submissionItems.map(([title, copy], index) => (
-            <div className="requirement" key={title}>
-              <span className="req-check" aria-hidden="true">✓</span>
-              <div><strong>{title}</strong><small>{copy}</small></div>
-              <span className="req-index">{String(index + 1).padStart(2, '0')}</span>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="selection">
-        <div className="shell selection-grid">
+      <section className="section shell achievements-section" id="achievements">
+        <div className="achievements-intro">
           <div>
-            <p className="section-label light">CURATED, NOT A QUEUE</p>
-            <h2>Impact sets<br />the priority.</h2>
-            <p className="selection-copy">
-              Submission does not guarantee selection. We start with a small number of high-impact tasks so every accepted request can become a complete, useful case study.
+            <p className="section-label">SELECTED ACHIEVEMENTS</p>
+            <h2 className="achievements-title">Built by agents.<br /><span>Merged upstream.</span></h2>
+          </div>
+          <div className="achievements-copy">
+            <p>
+              KDA has already turned optimization targets into production contributions across LLM serving, image generation, and video workloads.
             </p>
           </div>
-          <div className="priority-list">
-            <p className="priority-title">WE PRIORITIZE TASKS THAT</p>
-            <ul>
-              <li><span>01</span>Affect real artificial intelligence systems</li>
-              <li><span>02</span>Cover meaningful workload distributions</li>
-              <li><span>03</span>Have a clear, measurable bottleneck</li>
-              <li><span>04</span>Can benefit multiple users or projects</li>
-              <li><span>05</span>Can be evaluated and reproduced publicly</li>
-              <li><span>06</span>Have a realistic path to upstream adoption</li>
-            </ul>
-          </div>
         </div>
+
+        <div className="achievements-grid" aria-label="Selected KDA kernel achievements">
+          {achievements.map(({ metric, metricLabel, title, benchmark, id, project, status, linkLabel, href, source }, index) => (
+            <article className="achievement-card" key={id}>
+              <div className="achievement-card-top">
+                <span>{String(index + 1).padStart(2, '0')} / {project}</span>
+                <span className="achievement-status"><i /> {status}</span>
+              </div>
+              <div className="achievement-metric">
+                <strong>{metric}</strong>
+                <span>{metricLabel}</span>
+              </div>
+              <div className="achievement-body">
+                <h3>{title}</h3>
+                <p>{benchmark}</p>
+              </div>
+              <a className="achievement-link" href={href}>
+                {linkLabel} <span aria-hidden="true">↗</span>
+              </a>
+              <p className="achievement-source">Source: <cite>{source}</cite></p>
+            </article>
+          ))}
+        </div>
+
+        <p className="achievements-note">
+          Results vary by hardware, model, and workload. See each linked pull request or repository for validation and reproduction details.
+        </p>
       </section>
 
       <section className="proof shell">
         <div className="proof-kicker">
-          <span className="proof-mark">K</span>
+          <span className="proof-mark">KDA</span>
           <span>PROVEN IN COMPETITION</span>
         </div>
         <blockquote>
@@ -181,7 +338,7 @@ export default function Home() {
       <section className="section shell faq-section" id="faq">
         <div className="section-heading">
           <p className="section-label">GOOD TO KNOW</p>
-          <h2>Before you<br />open an issue.</h2>
+          <h2>Before you<br />request a kernel</h2>
         </div>
         <div className="faq-list">
           <details>
@@ -189,12 +346,16 @@ export default function Home() {
             <p>Open the public wishlist, find a request you care about, and add a thumbs-up reaction to the top-level GitHub issue. Comments are best used for new workload evidence or implementation context.</p>
           </details>
           <details>
-            <summary>What will a completed task include?<span aria-hidden="true">+</span></summary>
-            <p>Depending on the task, results may include an optimized kernel, correctness evidence, baseline comparisons, workload benchmarks, reproduction instructions, environment details, design notes, known limitations, and an upstream-ready contribution.</p>
+            <summary>Will my request and results be public?<span aria-hidden="true">+</span></summary>
+            <p>
+              Yes—unless we agree otherwise in advance. For accepted requests, KDA may publish the submitted definitions, generated implementations, benchmarks, profiling data, and design notes. We credit submitters for their definitions and workloads. If your business requires private kernels, email Ligeng Zhu at <a href="mailto:ligengz@nvidia.com">ligengz@nvidia.com</a> to discuss a collaboration.
+            </p>
           </details>
           <details>
-            <summary>Will my request and results be public?<span aria-hidden="true">+</span></summary>
-            <p>Yes, unless the team explicitly agrees otherwise. Accepted definitions, generated implementations, benchmarks, profiling results, and design summaries may be published. Submitters are credited for their definition and workload.</p>
+            <summary>How many kernels will KDA deliver?<span aria-hidden="true">+</span></summary>
+            <p>
+              KDA typically delivers one to three of the most-requested kernels each week, depending on the team’s development workload. Sihao Liu and Ligeng Zhu currently cover the GPU and model-token costs personally, so capacity is limited. If you have a larger operator roadmap, email Ligeng Zhu at <a href="mailto:ligengz@nvidia.com">ligengz@nvidia.com</a> to discuss establishing an official collaboration with NVIDIA.
+            </p>
           </details>
           <details>
             <summary>Why might a request be returned or declined?<span aria-hidden="true">+</span></summary>
@@ -217,7 +378,7 @@ export default function Home() {
 
       <footer className="footer shell">
         <a className="brand" href="#top" aria-label="KDA Wishlist home">
-          <span className="brand-mark" aria-hidden="true">K</span>
+          <span className="brand-mark" aria-hidden="true">KDA</span>
           <span>KDA <b>Wishlist</b></span>
         </a>
         <p>A community program for reproducible kernels.</p>

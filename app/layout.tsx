@@ -7,7 +7,7 @@ const siteUrl = process.env.SITE_URL ?? 'https://docs.humanfia.ai/KDA-wishlist';
 
 export const metadata: Metadata = {
   metadataBase: new URL(`${siteUrl}/`),
-  title: 'KDA Wishlist — Submit a definition. Get a solution.',
+  title: 'KDA Wishlist — Community wants, KDA provides!',
   description:
     'Submit reproducible GPU kernel definitions and workloads for Kernel Design Agents to optimize, validate, and return.',
   keywords: [
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     url: `${siteUrl}/`,
-    title: 'KDA Wishlist — Submit a definition. Get a solution.',
+    title: 'KDA Wishlist — Community wants, KDA provides!',
     description:
       'Turn a reproducible kernel definition into an optimized, validated implementation.',
     images: [{
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'KDA Wishlist — Submit a definition. Get a solution.',
+    title: 'KDA Wishlist — Community wants, KDA provides!',
     description:
       'Turn a reproducible kernel definition into an optimized, validated implementation.',
     images: [
