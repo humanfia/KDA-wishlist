@@ -38,7 +38,7 @@ const achievements = [
     id: 'kda-0.1-flashinfer-contest',
     project: 'FLASHINFER CONTEST',
     status: 'TOP 3',
-    linkLabel: 'MLSys’26 Contest',
+    linkLabel: 'Contest solution repo',
     href: 'https://mlsys26.flashinfer.ai/',
   },
   {
@@ -53,26 +53,26 @@ const achievements = [
     href: 'https://github.com/svg-project/flash-kmeans/pull/23',
   },
   {
-    metric: '2.32×',
-    metricLabel: 'peak denoising',
-    title: 'Spectral Progressive Diffusion',
-    benchmark: 'FLUX.1 1.63×, FLUX.2 1.77×, Z-Image 2.07×, Wan 2.32×, Qwen-Image 1.60×',
-    id: '27524',
+    metric: '2.03×',
+    metricLabel: 'weighted B200 kernel group',
+    title: 'Cosmos3 causal Conv3D cat-pad',
+    benchmark: '10.621 → 5.240 ms weighted; model E2E +2.11%',
+    id: '29281',
     project: 'SGLANG',
     status: 'MERGED',
-    linkLabel: 'SGLang #27524',
-    href: 'https://github.com/sgl-project/sglang/pull/27524',
+    linkLabel: 'SGLang #29281',
+    href: 'https://github.com/sgl-project/sglang/pull/29281',
   },
   {
-    metric: '1.41×',
-    metricLabel: 'faster decode',
-    title: 'LTX-2 VAE channels-last-3d',
-    benchmark: '5.41 → 3.84 s; latency −29.0%',
-    id: '27431',
+    metric: '5.84×',
+    metricLabel: 'kernel geomean',
+    title: 'LTX-2.3 QKNorm + split-RoPE',
+    benchmark: 'B200 · 4.22–7.34× across 14 production shapes; E2E −9.16%',
+    id: '29708',
     project: 'SGLANG',
     status: 'MERGED',
-    linkLabel: 'SGLang #27431',
-    href: 'https://github.com/sgl-project/sglang/pull/27431',
+    linkLabel: 'SGLang #29708',
+    href: 'https://github.com/sgl-project/sglang/pull/29708',
   },
 ] as const;
 
@@ -305,9 +305,16 @@ export default function Home() {
                 <h3>{title}</h3>
                 <p>{benchmark}</p>
               </div>
-              <a className="achievement-link" href={href}>
-                {linkLabel} <span aria-hidden="true">↗</span>
-              </a>
+              <div className="achievement-links">
+                <a className="achievement-link" href={href}>
+                  {linkLabel} <span aria-hidden="true">↗</span>
+                </a>
+                {id === 'kda-0.1-flashinfer-contest' && (
+                  <a className="achievement-link" href={KDA_URL}>
+                    KDA Repo <span aria-hidden="true">↗</span>
+                  </a>
+                )}
+              </div>
             </article>
           ))}
         </div>

@@ -164,7 +164,8 @@ h2 { margin: 0; font-size: clamp(48px, 5.4vw, 76px); line-height: .98; letter-sp
 .achievement-body h3 { margin: 0 0 10px; font-size: 19px; line-height: 1.2; letter-spacing: -.025em; font-weight: 610; }
 .achievement-body p { margin: 0; color: #6b736f; font-size: 12px; line-height: 1.55; }
 .achievement-card:first-child .achievement-body p { color: #a1aaa5; }
-.achievement-link { width: fit-content; display: inline-flex; align-items: center; gap: 10px; margin-top: auto; padding-top: 25px; border-bottom: 1px solid currentColor; color: #3e4944; font: 650 11px/1 var(--font-geist-mono); }
+.achievement-links { display: flex; flex-direction: column; align-items: flex-start; gap: 11px; margin-top: auto; padding-top: 25px; }
+.achievement-link { width: fit-content; display: inline-flex; align-items: center; gap: 10px; border-bottom: 1px solid currentColor; color: #3e4944; font: 650 11px/1 var(--font-geist-mono); }
 .achievement-link span { transition: transform .2s ease; }
 .achievement-link:hover span { transform: translate(2px, -2px); }
 .achievement-card:first-child .achievement-link { color: var(--acid); }
