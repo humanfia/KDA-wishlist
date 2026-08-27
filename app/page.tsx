@@ -12,13 +12,12 @@ const achievements = [
     metric: '1.39×',
     metricLabel: 'peak vs. human SOTA',
     title: 'KDA-0.5 surpassed human SOTA',
-    benchmark: 'MLSys’26 FlashInfer Kernel Contest · B300 · MoE 1.25× · DSA 1.30× · GDN 1.39×',
+    benchmark: 'MLSys’26 FlashInfer Kernel Contest · B300 · MoE 2.25× · DSA 29.95× · GDN 6.10×',
     id: 'kda-1.5-flashinfer-contest',
     project: 'FLASHINFER CONTEST',
     status: 'SOTA',
     linkLabel: 'Contest solution repo',
     href: CONTEST_URL,
-    source: 'Humanize + KDA Achievements[NV Internal].pdf · p. 2',
   },
   {
     metric: '#1',
@@ -30,19 +29,17 @@ const achievements = [
     status: '1ST PLACE',
     linkLabel: 'Announcement on X',
     href: 'https://x.com/Yuchenj_UW/status/2072496816336290143',
-    source: 'Humanize + KDA Achievements[NV Internal].pdf · p. 12',
   },
   {
     metric: 'TOP3',
     metricLabel: 'all contest tracks',
     title: 'KDA-0.1 achieves TOP3 on every track',
-    benchmark: 'MLSys’26 FlashInfer Contest · FP8MoE 1.4× · DSA 33.3× · GDN 17.6×',
+    benchmark: 'MLSys’26 FlashInfer Contest · B300 · MoE 0.67× · DSA 11.91× · GDN 1.16×',
     id: 'kda-0.1-flashinfer-contest',
     project: 'FLASHINFER CONTEST',
     status: 'TOP 3',
     linkLabel: 'MLSys’26 Contest',
     href: 'https://mlsys26.flashinfer.ai/',
-    source: 'Humanize + KDA Achievements[NV Internal].pdf · p. 14',
   },
   {
     metric: '6.1×',
@@ -54,7 +51,6 @@ const achievements = [
     status: 'OPEN SOURCE',
     linkLabel: 'Flash-KMeans #23',
     href: 'https://github.com/svg-project/flash-kmeans/pull/23',
-    source: 'Humanize + KDA Achievements[NV Internal].pdf · p. 2',
   },
   {
     metric: '2.32×',
@@ -66,7 +62,6 @@ const achievements = [
     status: 'MERGED',
     linkLabel: 'SGLang #27524',
     href: 'https://github.com/sgl-project/sglang/pull/27524',
-    source: 'Humanize + KDA Achievements.pdf · p. 7',
   },
   {
     metric: '1.41×',
@@ -78,7 +73,6 @@ const achievements = [
     status: 'MERGED',
     linkLabel: 'SGLang #27431',
     href: 'https://github.com/sgl-project/sglang/pull/27431',
-    source: 'Humanize + KDA Achievements.pdf · p. 7',
   },
 ] as const;
 
@@ -297,7 +291,7 @@ export default function Home() {
         </div>
 
         <div className="achievements-grid" aria-label="Selected KDA kernel achievements">
-          {achievements.map(({ metric, metricLabel, title, benchmark, id, project, status, linkLabel, href, source }, index) => (
+          {achievements.map(({ metric, metricLabel, title, benchmark, id, project, status, linkLabel, href }, index) => (
             <article className="achievement-card" key={id}>
               <div className="achievement-card-top">
                 <span>{String(index + 1).padStart(2, '0')} / {project}</span>
@@ -314,7 +308,6 @@ export default function Home() {
               <a className="achievement-link" href={href}>
                 {linkLabel} <span aria-hidden="true">↗</span>
               </a>
-              <p className="achievement-source">Source: <cite>{source}</cite></p>
             </article>
           ))}
         </div>

@@ -168,9 +168,6 @@ h2 { margin: 0; font-size: clamp(48px, 5.4vw, 76px); line-height: .98; letter-sp
 .achievement-link span { transition: transform .2s ease; }
 .achievement-link:hover span { transform: translate(2px, -2px); }
 .achievement-card:first-child .achievement-link { color: var(--acid); }
-.achievement-source { margin: 14px 0 0; color: #8a918d; font: 500 9px/1.45 var(--font-geist-mono); }
-.achievement-source cite { font-style: normal; }
-.achievement-card:first-child .achievement-source { color: #858f89; }
 .achievements-note { max-width: none; margin: 19px 0 0; color: #7a817d; font: 500 10px/1.55 var(--font-geist-mono); white-space: nowrap; }
 
 .proof { padding-block: clamp(110px, 13vw, 175px); }
@@ -206,15 +203,15 @@ h2 { margin: 0; font-size: clamp(48px, 5.4vw, 76px); line-height: .98; letter-sp
 a:focus-visible, summary:focus-visible { outline: 3px solid #6e9100; outline-offset: 4px; border-radius: 3px; }
 
 @keyframes pipeline-stage-pulse {
-  0%, 22% { opacity: 1; }
-  28%, 100% { opacity: 0; }
+  0%, 20% { opacity: 1; }
+  22%, 100% { opacity: 0; }
 }
 
 @keyframes connector-packet {
-  0%, 24% { opacity: 0; transform: translateY(0); }
-  25% { opacity: 1; transform: translateY(0); }
-  32% { opacity: 1; transform: translateY(25px); }
-  33%, 100% { opacity: 0; transform: translateY(25px); }
+  0%, 22% { opacity: 0; transform: translateY(0); }
+  22.01% { opacity: 1; transform: translateY(0); }
+  33.32% { opacity: 1; transform: translateY(25px); }
+  33.33%, 100% { opacity: 0; transform: translateY(25px); }
 }
 
 @keyframes teaser-dash-flow {
