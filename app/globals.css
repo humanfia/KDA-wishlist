@@ -169,14 +169,16 @@ h2 { margin: 0; font-size: clamp(48px, 5.4vw, 76px); line-height: .98; letter-sp
 .achievement-link span { transition: transform .2s ease; }
 .achievement-link:hover span { transform: translate(2px, -2px); }
 .achievement-card:first-child .achievement-link { color: var(--acid); }
+.more-improvements { margin-top: 19px; color: #7a817d; font: 500 10px/1.55 var(--font-geist-mono); }
+.more-improvements-label { margin: 0 0 5px; color: #626b66; font-weight: 650; letter-spacing: .1em; text-transform: uppercase; }
+.improvements-list { display: grid; gap: 3px; margin: 0; padding: 0; list-style: none; }
+.improvement-line { white-space: nowrap; }
+.improvement-line::before { content: '•'; margin-right: 8px; color: #789900; }
+.improvement-line strong { color: #526b00; font-weight: 700; }
+.improvement-line a { border-bottom: 1px solid currentColor; color: #3e4944; font-weight: 650; }
+.improvement-line a span { display: inline-block; transition: transform .2s ease; }
+.improvement-line a:hover span { transform: translate(2px, -2px); }
 .achievements-note { max-width: none; margin: 19px 0 0; color: #7a817d; font: 500 10px/1.55 var(--font-geist-mono); white-space: nowrap; }
-
-.proof { padding-block: clamp(110px, 13vw, 175px); }
-.achievements-section + .proof { padding-top: 0; }
-.proof-kicker { display: flex; align-items: center; gap: 15px; color: #6d7571; font: 650 10px/1 var(--font-geist-mono); letter-spacing: .1em; }
-.proof-mark { width: 44px; height: 31px; display: grid; place-items: center; border-radius: 8px; background: var(--ink); color: var(--acid); font: 700 10px/1 var(--font-geist-mono); }
-.proof blockquote { max-width: 1050px; margin: 45px 0 38px; font-size: clamp(39px, 5.4vw, 72px); line-height: 1.06; letter-spacing: -.057em; font-weight: 430; }
-.proof blockquote strong { color: #5a671f; font-weight: 580; }
 
 .faq-section { border-top: 1px solid var(--line); }
 .faq-list { align-self: start; border-top: 1px solid var(--ink); }
@@ -279,8 +281,8 @@ a:focus-visible, summary:focus-visible { outline: 3px solid #6e9100; outline-off
   .achievements-intro { margin-bottom: 34px; }
   .achievements-grid { grid-template-columns: 1fr; }
   .achievement-card { min-height: 285px; }
+  .improvement-line { white-space: normal; }
   .achievements-note { white-space: normal; }
-  .proof blockquote { margin-top: 35px; }
   .final-cta { width: calc(100% - 28px); padding: 36px 24px; gap: 46px; }
   .final-actions .button { width: 100%; }
   .footer { grid-template-columns: 1fr; padding-block: 55px; text-align: left; }

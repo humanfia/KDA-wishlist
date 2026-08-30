@@ -38,7 +38,7 @@ const achievements = [
     id: 'kda-0.1-flashinfer-contest',
     project: 'FLASHINFER CONTEST',
     status: 'TOP 3',
-    linkLabel: 'Contest solution repo',
+    linkLabel: 'MLSys26 FlashInfer Contest',
     href: 'https://mlsys26.flashinfer.ai/',
   },
   {
@@ -73,6 +73,75 @@ const achievements = [
     status: 'MERGED',
     linkLabel: 'SGLang #29708',
     href: 'https://github.com/sgl-project/sglang/pull/29708',
+  },
+] as const;
+
+const moreImprovements = [
+  {
+    result: '1.21× selected GEMM',
+    operator: 'KDA NVFP4 GEMM for Qwen3.8 on SM120',
+    repoLabel: 'SGLang #36865',
+    href: 'https://github.com/sgl-project/sglang/pull/36865',
+  },
+  {
+    result: '+4.45% E2E throughput',
+    operator: 'Restore SM121 QSA correctness with Humanize + KDA',
+    repoLabel: 'SGLang #36845',
+    href: 'https://github.com/sgl-project/sglang/pull/36845',
+  },
+  {
+    result: '4.24–19.86% faster',
+    operator: 'Blackwell fused MHC half-MMA kernel',
+    repoLabel: 'TensorRT-LLM #16799',
+    href: 'https://github.com/NVIDIA/TensorRT-LLM/pull/16799',
+  },
+  {
+    result: '1.06× peak GEMM speedup',
+    operator: 'SM100 NVFP4 SVDQuant fused GEMM',
+    repoLabel: 'FlashInfer #3858',
+    href: 'https://github.com/flashinfer-ai/flashinfer/pull/3858',
+  },
+  {
+    result: '5.84× kernel geomean',
+    operator: 'LTX-2.3 QKNorm + split-RoPE CUDA fast path',
+    repoLabel: 'SGLang #29708',
+    href: 'https://github.com/sgl-project/sglang/pull/29708',
+  },
+  {
+    result: '1.032× model E2E',
+    operator: 'LTX-2 residual-gate CUDA fast path',
+    repoLabel: 'SGLang #29361',
+    href: 'https://github.com/sgl-project/sglang/pull/29361',
+  },
+  {
+    result: '2.03× weighted kernel group',
+    operator: 'Cosmos3 causal Conv3D cat-pad CUDA fast path',
+    repoLabel: 'SGLang #29281',
+    href: 'https://github.com/sgl-project/sglang/pull/29281',
+  },
+  {
+    result: '1.06× denoise speedup',
+    operator: 'Sana packed self- and cross-attention GEMMs',
+    repoLabel: 'SGLang #28393',
+    href: 'https://github.com/sgl-project/sglang/pull/28393',
+  },
+  {
+    result: '1.015× denoise speedup',
+    operator: 'FLUX fused FeedForward GELU up-projection',
+    repoLabel: 'SGLang #28166',
+    href: 'https://github.com/sgl-project/sglang/pull/28166',
+  },
+  {
+    result: '1.13× denoise speedup',
+    operator: 'Qwen-Image norm-scale-shift',
+    repoLabel: 'SGLang #27392',
+    href: 'https://github.com/sgl-project/sglang/pull/27392',
+  },
+  {
+    result: '1.06× chat throughput',
+    operator: 'Qwen3-Next FP8 MoE',
+    repoLabel: 'SGLang #26204',
+    href: 'https://github.com/sgl-project/sglang/pull/26204',
   },
 ] as const;
 
@@ -319,20 +388,20 @@ export default function Home() {
           ))}
         </div>
 
+        <div className="more-improvements" id="more-improvements">
+          <p className="more-improvements-label">More improvements</p>
+          <ul className="improvements-list" aria-label="More KDA improvements">
+            {moreImprovements.map(({ result, operator, repoLabel, href }) => (
+              <li className="improvement-line" key={repoLabel}>
+                <strong>{result}</strong> · {operator} · <a href={href}>{repoLabel} <span aria-hidden="true">↗</span></a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
         <p className="achievements-note">
           Results vary by hardware, model, and workload. See each linked pull request or repository for validation and reproduction details.
         </p>
-      </section>
-
-      <section className="proof shell">
-        <div className="proof-kicker">
-          <span className="proof-mark">KDA</span>
-          <span>PROVEN IN COMPETITION</span>
-        </div>
-        <blockquote>
-          The workflow behind KDA earned <strong>1st, 2nd, and 3rd place</strong> across the three fully agent-driven tracks in the MLSys 2026 FlashInfer contest.
-        </blockquote>
-        <a className="text-link" href={CONTEST_URL}>Review the released workflow and results <span aria-hidden="true">↗</span></a>
       </section>
 
       <section className="section shell faq-section" id="faq">
@@ -348,13 +417,13 @@ export default function Home() {
           <details>
             <summary>Will my request and results be public?<span aria-hidden="true">+</span></summary>
             <p>
-              Yes—unless we agree otherwise in advance. For accepted requests, KDA may publish the submitted definitions, generated implementations, benchmarks, profiling data, and design notes. We credit submitters for their definitions and workloads. If your business requires private kernels, email Ligeng Zhu at <a href="mailto:ligengz@nvidia.com">ligengz@nvidia.com</a> to discuss a collaboration.
+              Yes—unless we agree otherwise in advance. For accepted requests, KDA may publish the submitted definitions, generated implementations, benchmarks, profiling data, and design notes. We credit submitters for their definitions and workloads. We are also collecting representative kernels and workloads to guide the development of the next generation of KDA. If your business requires private kernels, email Ligeng Zhu at <a href="mailto:ligengz@nvidia.com">ligengz@nvidia.com</a> to discuss a collaboration.
             </p>
           </details>
           <details>
             <summary>How many kernels will KDA deliver?<span aria-hidden="true">+</span></summary>
             <p>
-              KDA typically delivers one to three of the most-requested kernels each week, depending on the team’s development workload. Sihao Liu and Ligeng Zhu currently cover the GPU and model-token costs personally, so capacity is limited. If you have a larger operator roadmap, email Ligeng Zhu at <a href="mailto:ligengz@nvidia.com">ligengz@nvidia.com</a> to discuss establishing an official collaboration with NVIDIA.
+              KDA typically delivers one to three of the most-requested kernels each week, depending on the team’s development workload. Sihao Liu and Ligeng Zhu are currently self-paying the GPU and tokens, so capacity is limited. If you have a larger operator roadmap, email Ligeng Zhu at <a href="mailto:ligengz@nvidia.com">ligengz@nvidia.com</a> to discuss establishing an official collaboration with NVIDIA.
             </p>
           </details>
           <details>
@@ -381,10 +450,9 @@ export default function Home() {
           <span className="brand-mark" aria-hidden="true">KDA</span>
           <span>KDA <b>Wishlist</b></span>
         </a>
-        <p>A community program for reproducible kernels.</p>
+        <p>An agentic-driven CUDA project</p>
         <div>
           <a href={ISSUES_URL}>GitHub</a>
-          <a href={KDA_URL}>KDA Research</a>
           <a href="https://mlsys26.flashinfer.ai/">MLSys 2026</a>
         </div>
       </footer>
