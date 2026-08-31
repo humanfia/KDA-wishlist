@@ -2,6 +2,8 @@ const NEW_REQUEST_URL =
   'https://github.com/humanfia/KDA-wishlist/issues/new?template=kernel-request.yml';
 const ISSUES_URL = 'https://github.com/humanfia/KDA-wishlist/issues';
 const KDA_URL = 'https://github.com/mit-han-lab/kernel-design-agents';
+const FLASHINFER_TRACE_URL =
+  'https://bench.flashinfer.ai/docs/flashinfer-trace';
 const TECH_REPORT_URL =
   'https://github.com/mit-han-lab/mlsys2026-flashinfer-contest/blob/main/docs/HAN_Lab_Kernel_Mafia_Technical_Report.pdf';
 const CONTEST_URL =
@@ -272,6 +274,17 @@ export default function Home() {
             <p>Need a CUDA kernel for your training/inference but cannot find the experts to implement?</p>
             <p>Submit your definitions and workloads to KDA-wishlist, and KDA will automatically optimize it w/ agentic workflows!</p>
           </div>
+          <aside className="trace-intro" aria-labelledby="trace-intro-title">
+            <div>
+              <h2 id="trace-intro-title">What is FlashInfer Trace?</h2>
+              <p>
+                A standardized JSON format for describing a GPU kernel workload and recording its solutions and benchmark results.
+              </p>
+            </div>
+            <a href={FLASHINFER_TRACE_URL}>
+              Read the docs <span aria-hidden="true">↗</span>
+            </a>
+          </aside>
           <div className="hero-actions">
             <a className="button button-primary" href={NEW_REQUEST_URL}>
               Request a kernel <span aria-hidden="true">↗</span>
