@@ -338,7 +338,10 @@ export default function Home() {
           <p>
             FlashInfer Trace is a standardized JSON format for describing a GPU kernel workload and recording its solutions and benchmark results.
           </p>
-          <a className="text-link" href={TECH_REPORT_URL}>Explore the KDA tech report <span aria-hidden="true">↗</span></a>
+          <div className="section-links">
+            <a className="text-link" href={TECH_REPORT_URL}>Explore the KDA tech report <span aria-hidden="true">↗</span></a>
+            <a className="text-link" href={FLASHINFER_TRACE_URL}>Explore the FlashInfer-Trace spec <span aria-hidden="true">↗</span></a>
+          </div>
         </div>
       </section>
 

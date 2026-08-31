@@ -103,6 +103,7 @@ h2 { margin: 0; font-size: clamp(48px, 5.4vw, 76px); line-height: .98; letter-sp
 .process-section h2 { font-size: clamp(48px, 4.55vw, 60px); }
 .section-intro { align-self: end; padding-bottom: 5px; }
 .section-intro > p { margin: 0 0 30px; color: #555e59; font-size: 18px; line-height: 1.65; letter-spacing: -.018em; }
+.section-links { display: flex; align-items: center; flex-wrap: wrap; gap: 18px 28px; }
 .text-link { display: inline-flex; align-items: center; gap: 13px; border-bottom: 1px solid currentColor; padding-bottom: 5px; font-size: 13px; font-weight: 630; }
 .text-link span { transition: transform .2s ease; }
 .text-link:hover span { transform: translate(2px, -2px); }
