@@ -274,17 +274,6 @@ export default function Home() {
             <p>Need a CUDA kernel for your training/inference but cannot find the experts to implement?</p>
             <p>Submit your definitions and workloads to KDA-wishlist, and KDA will automatically optimize it w/ agentic workflows!</p>
           </div>
-          <aside className="trace-intro" aria-labelledby="trace-intro-title">
-            <div>
-              <h2 id="trace-intro-title">What is FlashInfer Trace?</h2>
-              <p>
-                A standardized JSON format for describing a GPU kernel workload and recording its solutions and benchmark results.
-              </p>
-            </div>
-            <a href={FLASHINFER_TRACE_URL}>
-              Read the docs <span aria-hidden="true">↗</span>
-            </a>
-          </aside>
           <div className="hero-actions">
             <a className="button button-primary" href={NEW_REQUEST_URL}>
               Request a kernel <span aria-hidden="true">↗</span>
@@ -306,7 +295,15 @@ export default function Home() {
           </div>
           <div className="pipeline-stage stage-input">
             <span className="stage-index">01</span>
-            <div><small>YOU PROVIDE</small><strong>FlashInfer Trace</strong><p>Definition · Workloads · Target</p></div>
+            <div>
+              <small>YOU PROVIDE</small>
+              <strong>
+                <a className="pipeline-link" href={FLASHINFER_TRACE_URL}>
+                  FlashInfer Trace <span aria-hidden="true">↗</span>
+                </a>
+              </strong>
+              <p>Definition · Workloads · Target</p>
+            </div>
           </div>
           <div className="connector connector-research"><span className="connector-track" aria-hidden="true"><i /></span><small>research · generate · verify</small></div>
           <div className="pipeline-stage stage-process">
@@ -336,7 +333,7 @@ export default function Home() {
         </div>
         <div className="section-intro">
           <p>
-            Kernel Design Agents (KDA) are agentic CUDA systems that research, implement, verify, and iterate on performance-sensitive kernel tasks. Each request gives them a measurable contract—not just an idea.
+            Each request begins with a FlashInfer Trace—a standardized JSON format that describes a GPU kernel workload and records its solutions and benchmark results. Kernel Design Agents (KDA) use that measurable contract to research, implement, verify, and iterate on performance-sensitive tasks.
           </p>
           <a className="text-link" href={TECH_REPORT_URL}>Explore the KDA tech report <span aria-hidden="true">↗</span></a>
         </div>
