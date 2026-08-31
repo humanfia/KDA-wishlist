@@ -333,7 +333,10 @@ export default function Home() {
         </div>
         <div className="section-intro">
           <p>
-            Each request begins with a FlashInfer Trace—a standardized JSON format that describes a GPU kernel workload and records its solutions and benchmark results. Kernel Design Agents (KDA) use that measurable contract to research, implement, verify, and iterate on performance-sensitive tasks.
+            Kernel Design Agents (KDA) are agentic CUDA systems that research, implement, verify, and iterate on performance-sensitive kernel tasks. Each request gives them a measurable contract—not just an idea.
+          </p>
+          <p>
+            FlashInfer Trace is a standardized JSON format for describing a GPU kernel workload and recording its solutions and benchmark results.
           </p>
           <a className="text-link" href={TECH_REPORT_URL}>Explore the KDA tech report <span aria-hidden="true">↗</span></a>
         </div>
