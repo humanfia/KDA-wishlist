@@ -2,6 +2,8 @@ const NEW_REQUEST_URL =
   'https://github.com/humanfia/KDA-wishlist/issues/new?template=kernel-request.yml';
 const ISSUES_URL = 'https://github.com/humanfia/KDA-wishlist/issues';
 const KDA_URL = 'https://github.com/mit-han-lab/kernel-design-agents';
+const FLASHINFER_TRACE_URL =
+  'https://bench.flashinfer.ai/docs/flashinfer-trace';
 const TECH_REPORT_URL =
   'https://github.com/mit-han-lab/mlsys2026-flashinfer-contest/blob/main/docs/HAN_Lab_Kernel_Mafia_Technical_Report.pdf';
 const CONTEST_URL =
@@ -293,7 +295,15 @@ export default function Home() {
           </div>
           <div className="pipeline-stage stage-input">
             <span className="stage-index">01</span>
-            <div><small>YOU PROVIDE</small><strong>FlashInfer Trace</strong><p>Definition · Workloads · Target</p></div>
+            <div>
+              <small>YOU PROVIDE</small>
+              <strong>
+                <a className="pipeline-link" href={FLASHINFER_TRACE_URL}>
+                  FlashInfer Trace <span aria-hidden="true">↗</span>
+                </a>
+              </strong>
+              <p>Definition · Workloads · Target</p>
+            </div>
           </div>
           <div className="connector connector-research"><span className="connector-track" aria-hidden="true"><i /></span><small>research · generate · verify</small></div>
           <div className="pipeline-stage stage-process">
@@ -325,7 +335,13 @@ export default function Home() {
           <p>
             Kernel Design Agents (KDA) are agentic CUDA systems that research, implement, verify, and iterate on performance-sensitive kernel tasks. Each request gives them a measurable contract—not just an idea.
           </p>
-          <a className="text-link" href={TECH_REPORT_URL}>Explore the KDA tech report <span aria-hidden="true">↗</span></a>
+          <p>
+            FlashInfer Trace is a standardized JSON format for describing a GPU kernel definition and its workload.
+          </p>
+          <div className="section-links">
+            <a className="text-link" href={TECH_REPORT_URL}>Explore the KDA tech report <span aria-hidden="true">↗</span></a>
+            <a className="text-link" href={FLASHINFER_TRACE_URL}>Explore the FlashInfer-Trace spec <span aria-hidden="true">↗</span></a>
+          </div>
         </div>
       </section>
 

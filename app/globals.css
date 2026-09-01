@@ -76,6 +76,9 @@ h1 em { color: #67706b; font-style: normal; font-weight: 430; }
 .pipeline-stage div { display: grid; gap: 5px; }
 .pipeline-stage small { color: #89938e; font: 600 9px/1 var(--font-geist-mono); letter-spacing: .1em; }
 .pipeline-stage strong { font-size: 19px; letter-spacing: -.025em; font-weight: 590; }
+.pipeline-link { width: fit-content; display: inline-flex; align-items: center; gap: 9px; border-bottom: 1px solid rgba(199,255,61,.5); }
+.pipeline-link span { color: var(--acid); font-size: 13px; transition: transform .2s ease; }
+.pipeline-link:hover span { transform: translate(2px, -2px); }
 .pipeline-stage p { margin: 0; color: #99a29e; font: 500 11px/1.45 var(--font-geist-mono); }
 .check { margin-left: auto; width: 27px; height: 27px; display: grid; place-items: center; border: 1px solid rgba(199,255,61,.65); color: var(--acid); border-radius: 50%; }
 .connector { position: relative; z-index: 2; height: 47px; display: flex; align-items: center; gap: 12px; padding-left: 20px; color: var(--acid); }
@@ -100,7 +103,8 @@ h2 { margin: 0; font-size: clamp(48px, 5.4vw, 76px); line-height: .98; letter-sp
 .process-section h2 { font-size: clamp(48px, 4.55vw, 60px); }
 .section-intro { align-self: end; padding-bottom: 5px; }
 .section-intro > p { margin: 0 0 30px; color: #555e59; font-size: 18px; line-height: 1.65; letter-spacing: -.018em; }
-.text-link { display: inline-flex; align-items: center; gap: 13px; border-bottom: 1px solid currentColor; padding-bottom: 5px; font-size: 13px; font-weight: 630; }
+.section-links { display: flex; flex-direction: column; align-items: flex-start; gap: 18px; }
+.text-link { display: inline-flex; align-items: center; gap: 13px; border-bottom: 1px solid currentColor; padding-bottom: 5px; font-size: 13px; font-weight: 630; white-space: nowrap; }
 .text-link span { transition: transform .2s ease; }
 .text-link:hover span { transform: translate(2px, -2px); }
 
