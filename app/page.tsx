@@ -336,7 +336,7 @@ export default function Home() {
             Kernel Design Agents (KDA) are agentic CUDA systems that research, implement, verify, and iterate on performance-sensitive kernel tasks. Each request gives them a measurable contract—not just an idea.
           </p>
           <p>
-            FlashInfer Trace is a standardized JSON format for describing a GPU kernel workload and recording its solutions and benchmark results.
+            FlashInfer Trace is a standardized JSON format for describing a GPU kernel definition and its workload.
           </p>
           <div className="section-links">
             <a className="text-link" href={TECH_REPORT_URL}>Explore the KDA tech report <span aria-hidden="true">↗</span></a>
